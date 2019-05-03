@@ -1,0 +1,32 @@
+# Unity generated
+Temp/
+Obj/
+UnityGenerated/
+Library/
+
+# IDE generated
+ExportedObj/
+*.svd
+*.userprefs
+*.csproj
+*.pidb
+*.suo
+*.sln
+*.user
+*.unityproj
+*.booproj
+
+# os specific
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+
+# language / plugin specific
+*.log #log files, for some plugins
+*.pyc #python bytecode cache, for some plugins.
+sysinfo.txt #Unity3D Generated File On Crash Reports
