@@ -4,7 +4,12 @@ Obj/
 UnityGenerated/
 Library/
 
+# build result
+build_Data/
+build.x86
+
 # IDE generated
+.vscode/
 ExportedObj/
 *.svd
 *.userprefs
