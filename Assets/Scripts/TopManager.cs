@@ -12,8 +12,8 @@ public class TopManager : MonoBehaviour {
     public GameObject notice_text1;
     public GameObject notice_text2;
     public GameObject FixBtn;
-    Sprite fix_on_btn;
-    Sprite fix_off_btn;
+    public Sprite fix_on_btn;
+    public Sprite fix_off_btn;
     public GameObject UserDataManager;
     public GameObject winCount;
     public GameObject loseCount;
@@ -25,9 +25,6 @@ public class TopManager : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        // ToDo 現在はスタートとかで呼び出すがのが推奨されてない。https://teratail.com/questions/45400
-        fix_on_btn = Resources.Load<Sprite>("Img/common/buttom/bt_fix");
-        fix_off_btn = Resources.Load<Sprite>("Img/common/buttom/bt_fix_of");
         // プライヤーデータマネージーにアクセス
         UserDataManager get_user_data = UserDataManager.GetComponent <UserDataManager> ();
 
@@ -59,7 +56,6 @@ public class TopManager : MonoBehaviour {
     public void EndEdit()
     {
         input_user_name = InputUserNameField.GetComponent<InputField>().text;
-        Debug.Log(input_user_name);
         bool user_name_decision = CheckUserName(input_user_name);
         if (user_name_decision)
         {

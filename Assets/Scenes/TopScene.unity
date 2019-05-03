@@ -1175,7 +1175,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1014842344
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1388,6 +1388,8 @@ MonoBehaviour:
   notice_text1: {fileID: 1315278805}
   notice_text2: {fileID: 726339856}
   FixBtn: {fileID: 857746645}
+  fix_on_btn: {fileID: 21300000, guid: 367097ce687b3461684696922ea35727, type: 3}
+  fix_off_btn: {fileID: 21300000, guid: 05354fbbed88d4cbaba628fbe5908439, type: 3}
   UserDataManager: {fileID: 1259455260}
   winCount: {fileID: 1714136510}
   loseCount: {fileID: 211947094}
