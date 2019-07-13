@@ -29,7 +29,7 @@ public class GhostAnimation : MonoBehaviour {
 	}
 
     /*
-     * ゴーストの結果アニメーション切り替え
+     * 敵ゴーストの結果アニメーション切り替え
      * @param target ゲームオブジェクト ゴースト
      */
     public void ghostResult(GameObject target)
@@ -46,5 +46,43 @@ public class GhostAnimation : MonoBehaviour {
             animator.SetInteger("judge", ghost_red);
         }
 
+    }
+
+    /*
+     * 自分ゴーストの出現アニメーション
+     * @param target ゲームオブジェクト ゴースト
+     */
+    public void myGhostPop(GameObject target)
+    {
+        _target_ghost = target;
+        Animator animator = _target_ghost.GetComponent<Animator>();
+
+        if (test_type == GHOST_TYPE_BLUE)
+        {
+            animator.SetInteger("ghost_type", ghost_blue);
+        }
+        else if (test_type == GHOST_TYPE_RED)
+        {
+            animator.SetInteger("ghost_type", ghost_red);
+        }
+    }
+
+    /*
+     * 自分ゴーストの消えるアニメーション
+     * @param target ゲームオブジェクト ゴースト
+     */
+    public void myGhostDisppear(GameObject target)
+    {
+        _target_ghost = target;
+        Animator animator = _target_ghost.GetComponent<Animator>();
+
+        if (test_type == GHOST_TYPE_BLUE)
+        {
+            animator.SetInteger("be_taken_piece", ghost_blue);
+        }
+        else if (test_type == GHOST_TYPE_RED)
+        {
+            animator.SetInteger("be_taken_piece", ghost_red);
+        }
     }
 }
