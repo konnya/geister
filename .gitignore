@@ -42,3 +42,5 @@ sysinfo.txt #Unity3D Generated File On Crash Reports
 .vs/kohya/xs/sqlite3/storage.ide
 .vs/kohya/xs/sqlite3/storage.ide-shm
 .vs/kohya/xs/sqlite3/storage.ide-wal
+
+obj

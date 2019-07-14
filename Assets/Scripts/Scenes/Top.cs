@@ -38,6 +38,7 @@ public class Top : MonoBehaviour {
 	public void OnClickVsCpu() {
 		Debug.Log($"Callback : {nameof(OnClickVsCpu)}");
 		// SceneManager.LoadScene("MatchingScene");
+		SceneManager.LoadScene("GameScene");
 	}
 	public void OnClickVsPlayer() {
 		Debug.Log($"Callback : {nameof(OnClickVsPlayer)}");

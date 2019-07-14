@@ -54,8 +54,18 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\_setup\_setup.cs" />
+     <Compile Include="Assets\Scripts\board-game\Board.cs" />
+     <Compile Include="Assets\Scripts\board-game\Common.cs" />
+     <Compile Include="Assets\Scripts\board-game\Exception.cs" />
+     <Compile Include="Assets\Scripts\board-game\GameManager.cs" />
+     <Compile Include="Assets\Scripts\board-game\MoveSkill.cs" />
+     <Compile Include="Assets\Scripts\board-game\Piece.cs" />
+     <Compile Include="Assets\Scripts\board-game\Pos.cs" />
+     <Compile Include="Assets\Scripts\board-game\Sample.cs" />
+     <Compile Include="Assets\Scripts\GameScene.old.cs" />
      <Compile Include="Assets\Scripts\GhostAnimation.cs" />
      <Compile Include="Assets\Scripts\PlayerManager.cs" />
+     <Compile Include="Assets\Scripts\Scenes\GameScene.cs" />
      <Compile Include="Assets\Scripts\Scenes\InitialTop.cs" />
      <Compile Include="Assets\Scripts\Scenes\SetupUserInfo.cs" />
      <Compile Include="Assets\Scripts\Scenes\Top.cs" />
@@ -66,16 +76,16 @@
      <Compile Include="Assets\test_script2.cs" />
      <Compile Include="Assets\UserInfo.cs" />
  <Reference Include="UnityEditor.StandardEvents">
- <HintPath>/home/kasai/work/koya/geister/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+ <HintPath>/home/kasai/work/kohya/unity/geister/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>/home/kasai/work/koya/geister/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>/home/kasai/work/kohya/unity/geister/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.PackageManagerUI.Editor">
- <HintPath>/home/kasai/work/koya/geister/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+ <HintPath>/home/kasai/work/kohya/unity/geister/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>/home/kasai/work/koya/geister/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>/home/kasai/work/kohya/unity/geister/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>/home/kasai/Unity-2018.2.2f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

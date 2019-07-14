@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Top/Top.unity
     guid: c195980b563174458a59919d74c8361d
   - enabled: 1
-    path: Assets/Scenes/GameScene.unity
+    path: Assets/Scenes/GameScene.old.unity
     guid: f666e1b45bfcd4e44813f06585dc3708
   - enabled: 1
     path: Assets/Scenes/MatchingScene.unity
@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/UserInfo/ConfirmUserInfo.unity
     guid: e543d674875ca4c008bbf65096f80806
+  - enabled: 1
+    path: Assets/Scenes/VsCPU/GameScene.unity
+    guid: 8522867ac8624402d81ddd077afaad3e
   m_configObjects: {}
