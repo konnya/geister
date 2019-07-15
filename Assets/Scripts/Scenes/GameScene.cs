@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class GameScene : MonoBehaviour {
 
@@ -14,7 +15,8 @@ public class GameScene : MonoBehaviour {
 	private UserInfo info;
 
 	private GameObject canvas;
-
+	private Graphic graphic;
+	
 	private List<GameObject> enemy = new List<GameObject>();
 	private List<GameObject> friend = new List<GameObject>();
 	private List<GameObject> pieces = new List<GameObject>();
@@ -22,6 +24,15 @@ public class GameScene : MonoBehaviour {
 	// o ---> [0.0, ...]
 	// |
 	// v [0.0, ...]
+	Vector2Int Position2AN(Vector3 pos) {
+		var x = (pos.x - kOriginX) / kPitch;
+		var y = (pos.y - kOriginY) / kPitch;
+		// Debug.Log($" {pos.x}, {pos.y} --> {x}, {y}");
+		x = +x + 0.5f;
+		y = -y + 0.5f;
+		return new Vector2Int((int)(Mathf.Floor(x)), (int)(Mathf.Floor(y)));
+	}
+
 	Vector3 Position(float x, float y) {
 		return new Vector3(kOriginX + x, kOriginY + y, 0.0f);
 	}
@@ -37,6 +48,9 @@ public class GameScene : MonoBehaviour {
 
 	GameObject Instantiate(GameObject prefab, int x, int y) {
 		Vector3 pos = prefab.transform.position + ANPosition(x, y);
+		Debug.Log($"Instantiate : {pos}");
+
+		// GameObject pc = Instantiate (prefab, pos, Quaternion.identity, Camera.main.transform);
 		GameObject pc = Instantiate (prefab, pos, Quaternion.identity);
 		pc.transform.SetParent(canvas.transform, false);
 		return pc;
@@ -56,7 +70,9 @@ public class GameScene : MonoBehaviour {
 		}
 
 		canvas = GameObject.Find("GameCanvas");
-
+		// "BoardImg" can be also used.
+		graphic = GameObject.Find("GameCanvas/BoardImg").GetComponent<Graphic>();
+		
         Debug.Log("Start!!");
 		GameObject prefab_enemy = (GameObject)Resources.Load ("Prefabs/EnemyGhost");
 		GameObject prefab_friend = (GameObject)Resources.Load ("Prefabs/FriendGhost");
@@ -81,6 +97,19 @@ public class GameScene : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		// Debug.Log$"Update : {nameof(OnClickVsCpu)}");
+	}
+
+	public void OnPointerClick(){
+		Debug.Log($"OnPointerClick : {canvas.transform.position}, {Input.mousePosition}");
+
+		Vector2 pos;
+		RectTransformUtility.ScreenPointToLocalPointInRectangle(
+			graphic.rectTransform, Input.mousePosition, Camera.main, out pos);
+
+		var an = Position2AN(pos);
+		Debug.Log($"OnPointerClick : {pos} --> {an}");
+
+		return;
 	}
 
 }
