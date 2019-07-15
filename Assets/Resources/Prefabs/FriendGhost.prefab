@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212905884938578988}
   - component: {fileID: 95628711338545092}
   m_Layer: 0
-  m_Name: EnemyGhost
+  m_Name: FriendGhost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,7 +50,7 @@ Animator:
   m_GameObject: {fileID: 1111605279411716}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1a42536090dc44f1b8f1b012b8baaf7d, type: 2}
+  m_Controller: {fileID: 9100000, guid: d2e1896124dcb46329aba9a466b2a6ae, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -94,7 +94,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300016, guid: 5242429cb735c4fd5905251c69aa15c4, type: 3}
+  m_Sprite: {fileID: 21300018, guid: 5242429cb735c4fd5905251c69aa15c4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

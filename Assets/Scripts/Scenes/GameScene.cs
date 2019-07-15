@@ -6,15 +6,16 @@ using UnityEngine.SceneManagement;
 
 public class GameScene : MonoBehaviour {
 
-	private UserInfo info;
-
-	private GameObject canvas;
-
 	private const float kPitch = 126.0f + 1.0f/3.0f;
 	private const float kOriginX = -323.0f;
 	private const float kOriginY = +360.0f;
 
+	private UserInfo info;
+
+	private GameObject canvas;
+
 	private List<GameObject> enemy = new List<GameObject>();
+	private List<GameObject> friend = new List<GameObject>();
 
 	// o ---> [0.0, ...]
 	// |
@@ -30,6 +31,13 @@ public class GameScene : MonoBehaviour {
     // Algebraic Notation Position
 	Vector3 ANPosition(int x, int y) {
 		return Position(x, -y);
+	}
+
+	GameObject Instantiate(GameObject prefab, int x, int y) {
+		Vector3 pos = prefab.transform.position + ANPosition(x, y);
+		GameObject pc = Instantiate (prefab, pos, Quaternion.identity);
+		pc.transform.SetParent(canvas.transform, false);
+		return pc;
 	}
 
 	// Use this for initialization
@@ -48,13 +56,26 @@ public class GameScene : MonoBehaviour {
 		canvas = GameObject.Find("GameCanvas");
 
         Debug.Log("Start!!");
-		GameObject prefab = (GameObject)Resources.Load ("Prefabs/EnemyGhost");
+		GameObject prefab_enemy = (GameObject)Resources.Load ("Prefabs/EnemyGhost");
+		GameObject prefab_friend = (GameObject)Resources.Load ("Prefabs/FriendGhost");
 		for (int i = 1; i < 5;i ++) {
 			for (int j = 0; j < 2;j ++) {
-				Vector3 pos = prefab.transform.position + ANPosition(i, j);
-				GameObject pc = Instantiate (prefab, pos, Quaternion.identity);
-				pc.transform.SetParent(canvas.transform, false);
+				// GameObject prefab = prefab_enemy;
+				// Vector3 pos = prefab.transform.position + ANPosition(i, j);
+				// GameObject pc = Instantiate (prefab, pos, Quaternion.identity);
+				// pc.transform.SetParent(canvas.transform, false);
+				GameObject pc = Instantiate(prefab_enemy, i, j);
 				enemy.Add(pc);
+			}
+			for (int j = 4; j < 6;j ++) {
+				// GameObject prefab = prefab_friend;
+				// Vector3 pos = prefab.transform.position + ANPosition(i, j);
+				// GameObject pc = Instantiate (prefab, pos, Quaternion.identity);
+				// pc.transform.SetParent(canvas.transform, false);
+				GameObject pc = Instantiate(prefab_friend, i, j);
+				friend.Add(pc);
+				pc.GetComponent<Animator>().SetInteger("Color", j == 4 ? 0 : 1);
+				pc.GetComponent<Animator>().SetTrigger("Pop");
 			}
 		}
 	}
