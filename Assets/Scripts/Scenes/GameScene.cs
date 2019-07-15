@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -16,6 +17,7 @@ public class GameScene : MonoBehaviour {
 
 	private List<GameObject> enemy = new List<GameObject>();
 	private List<GameObject> friend = new List<GameObject>();
+	private List<GameObject> pieces = new List<GameObject>();
 
 	// o ---> [0.0, ...]
 	// |
@@ -60,23 +62,19 @@ public class GameScene : MonoBehaviour {
 		GameObject prefab_friend = (GameObject)Resources.Load ("Prefabs/FriendGhost");
 		for (int i = 1; i < 5;i ++) {
 			for (int j = 0; j < 2;j ++) {
-				// GameObject prefab = prefab_enemy;
-				// Vector3 pos = prefab.transform.position + ANPosition(i, j);
-				// GameObject pc = Instantiate (prefab, pos, Quaternion.identity);
-				// pc.transform.SetParent(canvas.transform, false);
 				GameObject pc = Instantiate(prefab_enemy, i, j);
 				enemy.Add(pc);
-			}
-			for (int j = 4; j < 6;j ++) {
-				// GameObject prefab = prefab_friend;
-				// Vector3 pos = prefab.transform.position + ANPosition(i, j);
-				// GameObject pc = Instantiate (prefab, pos, Quaternion.identity);
-				// pc.transform.SetParent(canvas.transform, false);
-				GameObject pc = Instantiate(prefab_friend, i, j);
+
+				pc = Instantiate(prefab_friend, i, j + 4);
 				friend.Add(pc);
-				pc.GetComponent<Animator>().SetInteger("Color", j == 4 ? 0 : 1);
-				pc.GetComponent<Animator>().SetTrigger("Pop");
+				pc.GetComponent<Animator>().SetInteger("Color", j == 1 ? 0 : 1);
+
+				pieces.Add(pc);
 			}
+		}
+
+		foreach (GameObject pc in enemy.Concat(friend)) {
+			pc.GetComponent<Animator>().SetTrigger("Pop");
 		}
 	}
 	
