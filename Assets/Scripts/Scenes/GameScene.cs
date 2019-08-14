@@ -8,9 +8,12 @@ using UnityEngine.EventSystems;
 
 public class GameScene : MonoBehaviour {
 
-	private const float kPitch = 126.0f + 1.0f/3.0f;
-	private const float kOriginX = -323.0f;
-	private const float kOriginY = +360.0f;
+	private int kNumOfRows = 6;
+	private int kNumOfColumns = 6;
+	private float kPitchX;
+	private float kPitchY;
+	private float kOriginX;
+	private float kOriginY;
 
 	private UserInfo info;
 
@@ -25,9 +28,8 @@ public class GameScene : MonoBehaviour {
 	// |
 	// v [0.0, ...]
 	Vector2Int Position2AN(Vector3 pos) {
-		var x = (pos.x - kOriginX) / kPitch;
-		var y = (pos.y - kOriginY) / kPitch;
-		// Debug.Log($" {pos.x}, {pos.y} --> {x}, {y}");
+		var x = (pos.x - kOriginX) / kPitchX;
+		var y = (pos.y - kOriginY) / kPitchY;
 		x = +x + 0.5f;
 		y = -y + 0.5f;
 		return new Vector2Int((int)(Mathf.Floor(x)), (int)(Mathf.Floor(y)));
@@ -38,7 +40,7 @@ public class GameScene : MonoBehaviour {
 	}
 
 	Vector3 Position(int x, int y) {
-		return Position(kPitch * x, kPitch * y);
+		return Position(kPitchX * x, kPitchY * y);
 	}
 
     // Algebraic Notation Position
@@ -50,7 +52,6 @@ public class GameScene : MonoBehaviour {
 		Vector3 pos = prefab.transform.position + ANPosition(x, y);
 		Debug.Log($"Instantiate : {pos}");
 
-		// GameObject pc = Instantiate (prefab, pos, Quaternion.identity, Camera.main.transform);
 		GameObject pc = Instantiate (prefab, pos, Quaternion.identity);
 		pc.transform.SetParent(canvas.transform, false);
 		return pc;
@@ -72,6 +73,12 @@ public class GameScene : MonoBehaviour {
 		canvas = GameObject.Find("GameCanvas");
 		// "BoardImg" can be also used.
 		graphic = GameObject.Find("GameCanvas/BoardImg").GetComponent<Graphic>();
+
+		kPitchX  = graphic.rectTransform.sizeDelta.x / kNumOfColumns;
+		kPitchY  = graphic.rectTransform.sizeDelta.y / kNumOfRows;
+		kOriginX = -kPitchX * 5.0f / 2.0f;
+		kOriginY = +kPitchY * 5.0f / 2.0f;
+		Debug.Log($"Size : {kPitchX} {kPitchY} : {kOriginX} {kOriginY}");
 		
         Debug.Log("Start!!");
 		GameObject prefab_enemy = (GameObject)Resources.Load ("Prefabs/EnemyGhost");
@@ -102,10 +109,11 @@ public class GameScene : MonoBehaviour {
 	public void OnPointerClick(){
 		Debug.Log($"OnPointerClick : {canvas.transform.position}, {Input.mousePosition}");
 
+		// convert coordinates from screen's one to canvas's one
 		Vector2 pos;
 		RectTransformUtility.ScreenPointToLocalPointInRectangle(
 			graphic.rectTransform, Input.mousePosition, Camera.main, out pos);
-
+		
 		var an = Position2AN(pos);
 		Debug.Log($"OnPointerClick : {pos} --> {an}");
 
