@@ -48,12 +48,32 @@ public class GameScene : MonoBehaviour {
 		return Position(x, -y);
 	}
 
-	GameObject Instantiate(GameObject prefab, int x, int y) {
-		Vector3 pos = prefab.transform.position + ANPosition(x, y);
-		Debug.Log($"Instantiate : {pos}");
+	Vector3 ANPosition(Vector2Int pos) {
+	    return ANPosition(pos.x, pos.y);
+	}
 
-		GameObject pc = Instantiate (prefab, pos, Quaternion.identity);
+	Vector3 AN2Position(int x, int y) {
+        return new Vector3((float)(x) - 2.5f, (float)(-y) + 2.5f, 0.0f);
+	}
+
+	Vector3 AN2Position(Vector2Int an) {
+        return AN2Position(an.x, an.y);
+	}
+
+	GameObject Instantiate(GameObject prefab, int al, int num) {
+		// TODO(Takara.Kasai) : check coordination system of canvas.transform.
+        // Make an instance of game object from a prefab.
+		// And, then assign it as a child of canvas.
+
+		// Vector3 pos = prefab.transform.position + ANPosition(al, num);
+		// GameObject pc = Instantiate (prefab, pos, Quaternion.identity);
+		// pc.transform.SetParent(canvas.transform, false);
+		// Debug.Log($"Instantiate : {pos} --> {pc.transform.position}");
+
+        GameObject pc = Instantiate (prefab, Vector3.zero, Quaternion.identity);
 		pc.transform.SetParent(canvas.transform, false);
+		pc.transform.position = AN2Position(al, num);
+		Debug.Log($"Instantiate : {prefab.transform.position} --> {pc.transform.position} : {al},{num}");
 		return pc;
 	}
 
@@ -74,16 +94,20 @@ public class GameScene : MonoBehaviour {
 		// "BoardImg" can be also used.
 		graphic = GameObject.Find("GameCanvas/BoardImg").GetComponent<Graphic>();
 
+		// get size of board's rectangle from a board image.
 		kPitchX  = graphic.rectTransform.sizeDelta.x / kNumOfColumns;
 		kPitchY  = graphic.rectTransform.sizeDelta.y / kNumOfRows;
 		kOriginX = -kPitchX * 5.0f / 2.0f;
 		kOriginY = +kPitchY * 5.0f / 2.0f;
-		Debug.Log($"Size : {kPitchX} {kPitchY} : {kOriginX} {kOriginY}");
 		
         Debug.Log("Start!!");
 		GameObject prefab_enemy = (GameObject)Resources.Load ("Prefabs/EnemyGhost");
 		GameObject prefab_friend = (GameObject)Resources.Load ("Prefabs/FriendGhost");
+		// i: loop for alphabet in AN pos.
+		//                         ^
 		for (int i = 1; i < 5;i ++) {
+			// j: loop for number in AN pos.
+			//                        ^
 			for (int j = 0; j < 2;j ++) {
 				GameObject pc = Instantiate(prefab_enemy, i, j);
 				enemy.Add(pc);
@@ -115,7 +139,11 @@ public class GameScene : MonoBehaviour {
 			graphic.rectTransform, Input.mousePosition, Camera.main, out pos);
 		
 		var an = Position2AN(pos);
-		Debug.Log($"OnPointerClick : {pos} --> {an}");
+		Debug.Log($"OnPointerClick : {pos} --> {an} : {AN2Position(an)}");
+
+		// pieces[0].transform.position = new Vector3(2.5f, -0.5f, 0.0f);// ANPosition(an);
+		// pieces[0].transform.position = ANPosition(new Vector2Int(0,0));
+		pieces[0].transform.position = AN2Position(an);
 
 		return;
 	}
